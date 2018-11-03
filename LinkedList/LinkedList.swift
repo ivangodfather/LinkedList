@@ -53,6 +53,48 @@ struct LinkedList<T> {
         node.next = Node(value, next: node.next)
         return node.next!
     }
+    
+    @discardableResult
+    mutating func pop() -> T? {
+        defer {
+            head = head?.next
+            if isEmpty {
+                tail = nil
+            }
+        }
+        return head?.data
+    }
+    
+    @discardableResult
+    mutating func removeLast() -> T? {
+        guard !isEmpty else {
+            return nil
+        }
+        guard head?.next != nil else {
+            return pop()
+        }
+        var prev = head
+        var current = head
+        while let next = current?.next {
+            prev = current
+            current = next
+        }
+        prev?.next = nil
+        tail = prev
+        return current?.data
+    }
+    
+    @discardableResult
+    mutating func remove(after node: Node<T>) -> T? {
+        defer {
+            if node.next === tail {
+                tail = node
+            }
+            node.next = node.next?.next
+        }
+        
+        return node.next?.data
+    }
 }
 
 extension LinkedList: CustomStringConvertible {
