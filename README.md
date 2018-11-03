@@ -1,10 +1,14 @@
 # Example of LinkedList
 ## Basic operations and complexity
-###push
+### push
 O(1)
-###append
+
+### append
 O(1)
-###node(at:)
+
+### node(at:)
 O(n)
-###insert(value:after:)
+ 
+### insert(value:after:)
+
 O(1)
